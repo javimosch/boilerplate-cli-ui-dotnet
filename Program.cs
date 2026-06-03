@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,9 +50,54 @@ var app = builder.Build();
 // ─── Start Time (for uptime) ────────────────────────────────────
 var startTime = DateTime.UtcNow;
 
-// ─── Static Files (from wwwroot) ────────────────────────────────
-app.UseDefaultFiles();
-app.UseStaticFiles();
+// ─── Embedded Resources Helper ──────────────────────────────────
+var assembly = Assembly.GetExecutingAssembly();
+var resourcePrefix = "BoilerplateCliUiDotnet.wwwroot";
+
+string GetContentType(string path)
+{
+    return path.EndsWith(".html") ? "text/html" :
+           path.EndsWith(".js") ? "application/javascript" :
+           path.EndsWith(".css") ? "text/css" :
+           path.EndsWith(".json") ? "application/json" :
+           path.EndsWith(".png") ? "image/png" :
+           path.EndsWith(".jpg") || path.EndsWith(".jpeg") ? "image/jpeg" :
+           path.EndsWith(".svg") ? "image/svg+xml" :
+           "application/octet-stream";
+}
+
+app.MapGet("/", async (HttpContext context) =>
+{
+    var resourceName = $"{resourcePrefix}.index.html";
+    var stream = assembly.GetManifestResourceStream(resourceName);
+    if (stream != null)
+    {
+        context.Response.ContentType = "text/html";
+        await stream.CopyToAsync(context.Response.Body);
+    }
+    else
+    {
+        context.Response.StatusCode = 404;
+    }
+});
+
+app.MapGet("/{*path}", async (HttpContext context, string path) =>
+{
+    // Convert path to resource name (replace / with .)
+    var resourcePath = path.Replace("/", ".");
+    var resourceName = $"{resourcePrefix}.{resourcePath}";
+    
+    var stream = assembly.GetManifestResourceStream(resourceName);
+    if (stream != null)
+    {
+        context.Response.ContentType = GetContentType(path);
+        await stream.CopyToAsync(context.Response.Body);
+    }
+    else
+    {
+        context.Response.StatusCode = 404;
+    }
+});
 
 // ─── API Endpoints ──────────────────────────────────────────────
 app.MapGet("/api/status", () =>

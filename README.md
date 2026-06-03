@@ -115,7 +115,7 @@ Routes use hashbang URLs:
 
 | Aspect | Go | Rust | .NET 8 |
 |--------|-----|------|--------|
-| Binary size | ~5MB | ~1.1MB | ~15-30MB |
+| Binary size | ~5MB | ~1.1MB | ~89MB |
 | Embed pattern | `//go:embed` | `include_str!` | `EmbeddedResource` |
 | Modularity | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
 | Compile time | Fast | Medium | Medium |
