@@ -4,7 +4,7 @@
 
 Part of [SuperCLI](https://github.com/javimosch/supercli) - build CLI/UI plugins fast for 2026.
 
-**Other versions**: [Go+Vue](https://github.com/javimosch/boilerplate-cli-ui-go-v2-vue) | [Go+React](https://github.com/javimosch/boilerplate-cli-ui-go-v2-react) | [Rust](https://github.com/javimosch/boilerplate-cli-ui-rust) | [C++](https://github.com/javimosch/boilerplate-cli-ui-cpp) | [Node](https://github.com/javimosch/boilerplate-cli-ui-node) | [Python](https://github.com/javimosch/boilerplate-cli-ui-python)
+**Other versions**: [Go+Vue](https://github.com/javimosch/boilerplate-cli-ui-go-v2-vue) | [Go+React](https://github.com/javimosch/boilerplate-cli-ui-go-v2-react) | [Rust](https://github.com/javimosch/boilerplate-cli-ui-rust) | [C++](https://github.com/javimosch/boilerplate-cli-ui-cpp) | [Nim](https://github.com/javimosch/boilerplate-cli-ui-nim) | [Node](https://github.com/javimosch/boilerplate-cli-ui-node) | [Python](https://github.com/javimosch/boilerplate-cli-ui-python)
 
 ## Architecture
 
